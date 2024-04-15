@@ -1,8 +1,13 @@
-export default function Alert(params) {
+import React from 'react';
+
+export default function Alert(props) {
+    const capitalize = (word)=>{
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    }
+    
     return (
-        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        props.alert && <div class={`alert alert-${props.alert.type} alert-dismissible fade show mt-3`} role="alert">
+            <strong>{capitalize(props.alert.type)}!</strong> {props.alert.msg}
         </div>
     );
 }
