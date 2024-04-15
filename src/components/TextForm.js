@@ -4,23 +4,36 @@ export default function TextForm(props) {
     const handleUpClick = ()=>{
         let newText = text.toUpperCase();
         setText(newText);
+        props.handleAlert("Text converted to Uppercase!", "success");
     }
 
     const handleLoClick = ()=>{
         let newText = text.toLowerCase();
         setText(newText);
+        props.handleAlert("Text converted to Lowercase!", "success");
     }
 
     const handleClearText = ()=>{
         let newText = '';
         setText(newText);
+        props.handleAlert("Text cleared from textbox!", "success");
     }
 
     const handleUpOnChange= (i)=>{
         //console.log('Hello');
-        setText(i.target.value);
+        const newText = i.target.value;
+        setText(newText);
+        sanitizeAndWordCount(newText);
     }
     const [text, setText] = useState('');
+    const [wordCount, setWordCount] = useState(0);
+
+    const sanitizeAndWordCount = (inputText)=>{
+        const sanitizedText = inputText.trim();
+        const wordArray = sanitizedText.split(/\s+/);
+        const realWordCount = wordArray.filter(word => word !=='').length;
+        setWordCount(realWordCount); 
+    }
     
     return (
         <div>
@@ -33,7 +46,7 @@ export default function TextForm(props) {
             <button className='btn btn-danger' onClick={handleClearText}>Clear Text</button>
             <div className="row my-3">
                 <h3>Your text summary</h3>
-                <p>{text.split(" ").length} Words, {text.length} Characters and it will take around { 0.008 * text.split(" ").length } minutes to read above paragraph</p>
+                <p>{wordCount} Words, {text.length} Characters and it will take around { parseFloat((0.008 * wordCount).toFixed(1)) } minutes to read above paragraph</p>
                 <h4>Preview Your Text</h4>
                 <p>{text.length > 0 ? text : "Enter text to preview"}</p>
             </div>

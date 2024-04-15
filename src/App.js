@@ -25,14 +25,17 @@ function App() {
       msg: message,
       type: type,
     });
+    setTimeout(() => {
+      setAlert(null);
+    }, 1000);
   }
 
   return (
     <>
       <Navbar title="WebDev24x7" home="Home" about="About WebDev24x7" contact="Contact WebDev24x7" mode={mode} handleMode={handleMode} />
-      <Alert alert={alert} />
-      <div className='container'>
-        <TextForm label="Enter your text to transform"/>
+      <div className="container">
+        <Alert alert={alert} />
+        <TextForm label="Enter your text to transform" handleAlert={handleAlert}/>
       </div>
     </>
   );
