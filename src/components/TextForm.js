@@ -35,7 +35,7 @@ export default function TextForm(props) {
                 <h3>Your text summary</h3>
                 <p>{text.split(" ").length} Words, {text.length} Characters and it will take around { 0.008 * text.split(" ").length } minutes to read above paragraph</p>
                 <h4>Preview Your Text</h4>
-                <p>{text}</p>
+                <p>{text.length > 0 ? text : "Enter text to preview"}</p>
             </div>
         </div>
     )
