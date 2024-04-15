@@ -3,6 +3,8 @@ import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
 import Alert from './components/Alert';
+import About from './components/About';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -31,13 +33,19 @@ function App() {
   }
 
   return (
-    <>
-      <Navbar title="WebDev24x7" home="Home" about="About WebDev24x7" contact="Contact WebDev24x7" mode={mode} handleMode={handleMode} />
+    <Router>
+      <Navbar title="WebDev24x7" home="Home" about="About" contact="Contact" mode={mode} handleMode={handleMode} />
       <div className="container">
         <Alert alert={alert} />
-        <TextForm label="Enter your text to transform" handleAlert={handleAlert}/>
+        <Routes>
+          <Route path="*" element={<TextForm label="Homepage" handleAlert={handleAlert} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<TextForm label="Contact Us" handleAlert={handleAlert}/>} />
+        </Routes>
+        
+        {/* <TextForm label="Enter your text to transform" handleAlert={handleAlert}/> */}
       </div>
-    </>
+    </Router>
   );
 }
 
