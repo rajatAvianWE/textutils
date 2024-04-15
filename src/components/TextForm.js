@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Alert from './Alert';
 
 export default function TextForm(props) {
     const handleUpClick = ()=>{
@@ -24,6 +25,7 @@ export default function TextForm(props) {
     
     return (
         <div>
+            <Alert />
             <div className="mt-3 mb-3">
                 <h2 className="form-label mb-3">{props.label}</h2>
                 <textarea className="form-control" value={text} onChange={handleUpOnChange} id="textBox" rows="10" placeholder="Enter your text here to transform."></textarea>  
